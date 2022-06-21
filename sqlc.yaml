@@ -1,0 +1,7 @@
+version: 1
+packages:
+  - path: "internal/db/habits"
+    name: "db"
+    engine: "postgresql"
+    schema: "./internal/db/sql"
+    queries: "./internal/db/sql"
