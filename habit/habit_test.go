@@ -10,14 +10,15 @@ import (
 )
 
 const (
-	TestUuid string = "10d75b29-01e3-4b47-9ae7-2036c146119c"
+	TestUuid     string = "10d75b29-01e3-4b47-9ae7-2036c146119c"
+	TestUserUuid string = "67f4380b-4a51-4a69-bbee-66bd9fd10856"
 )
 
 func TestHabit(t *testing.T) {
 	t.Parallel()
 	_ = habit.Habit{
-		Id:          TestUuid,
-		Name:        "running",
+		Id:          uuid.MustParse(TestUuid),
+		Title:       "running",
 		Completed:   false,
 		DateStarted: time.Now(),
 	}
@@ -28,7 +29,7 @@ func fakeHabitCreator(t *testing.T) habit.HabitCreator {
 	return habit.HabitCreator{
 		NewId:       uuid.MustParse(TestUuid),
 		HabitName:   "running",
-		UserId:      1,
+		UserId:      uuid.MustParse(TestUserUuid),
 		DateStarted: testDate,
 	}
 }
@@ -38,8 +39,8 @@ func TestCreateHabit(t *testing.T) {
 
 	hc := fakeHabitCreator(t)
 	want := habit.Habit{
-		Id:          TestUuid,
-		Name:        hc.HabitName,
+		Id:          uuid.MustParse(TestUuid),
+		Title:       hc.HabitName,
 		Completed:   true,
 		DateStarted: hc.DateStarted,
 		UserId:      hc.UserId,

@@ -7,24 +7,25 @@ import (
 )
 
 type Habit struct {
-	Id          string
-	Name        string
+	Id uuid.UUID
+	// update this to be title
+	Title       string
 	Completed   bool
 	DateStarted time.Time
-	UserId      int
+	UserId      uuid.UUID
 }
 
 type HabitCreator struct {
 	NewId       uuid.UUID
 	DateStarted time.Time
 	HabitName   string
-	UserId      int
+	UserId      uuid.UUID
 }
 
 func CreateHabit(hc HabitCreator) Habit {
 	return Habit{
-		Id:          hc.NewId.String(),
-		Name:        hc.HabitName,
+		Id:          hc.NewId,
+		Title:       hc.HabitName,
 		Completed:   true,
 		DateStarted: hc.DateStarted,
 		UserId:      hc.UserId,
